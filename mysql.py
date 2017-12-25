@@ -1,10 +1,17 @@
 import pymysql
+import sys
 
-db=pymysql.connect("localhost","root","12345Fzx","tongji98k")
-cursor=db.cursor()
-cursor.execute("SHOW DATABASES")
-# data = cursor.fetchall()
-cursor.execute("use tongji98k")
-# data=cursor.fetchall()
-# print(data)
-db.close()
+sys.path.append(r'/Users/fanzixiao/PycharmProjects/spider/lib')
+from lib import FMysql
+
+mysql = FMysql.FMysql()
+
+array={'title':'test','content':'qwefeadsfada','time':'2017-01-01','id':2}
+
+# mysql.update(array,"id = 12","software_engineering")
+# mysql.create(array,"software_engineering")
+# print(mysql.readAll("software_engineering"))
+condition={'id':1}
+# print(mysql.readAllByWhere("software_engineering",condition))
+print(mysql.isUrlExist("software_engineering",1))
+
