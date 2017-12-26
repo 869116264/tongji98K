@@ -6,7 +6,7 @@ from lib import FMysql
 
 mysql = FMysql.FMysql()
 
-array={'title':'test','content':'qwefeadsfada','time':'2017-01-01','id':2}
+array={'title':'test','content':'qwefeadsfada','time':'2017-01-01','id':2,}
 
 # mysql.update(array,"id = 12","software_engineering")
 # mysql.create(array,"software_engineering")
@@ -14,4 +14,7 @@ array={'title':'test','content':'qwefeadsfada','time':'2017-01-01','id':2}
 condition={'id':1}
 # print(mysql.readAllByWhere("software_engineering",condition))
 print(mysql.isUrlExist("software_engineering",1))
+
+if not mysql.isUrlExist("software_engineering",1):
+    print("ok")
 

@@ -3,14 +3,14 @@ import traceback
 
 
 class FMysql:
-    def __init__(self, host="localhost", name="root", password="12345Fzx", dbname="tongji98k"):
-        self.db = pymysql.connect(host, name, password, dbname)
+    def __init__(self, host="localhost", name="root", password="12345Fzx", dbname="tongji98k",):
+        self.db = pymysql.connect(host, name, password, dbname,charset="utf8")
         self.cursor = self.db.cursor()
         self.dbname = dbname
         self.execute("use " + self.dbname)
 
-    def __del__(self):
-        self.db.close()
+    # def __del__(self):
+    #     self.db.close() 为什么不能db.close 因为被自动释放掉了?
 
     def __getCondition(self, tuple_condition):
         condition = ""
