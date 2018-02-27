@@ -3,8 +3,8 @@ import traceback
 
 
 class FMysql:
-    def __init__(self, host="localhost", name="root", password="12345Fzx", dbname="tongji98k",):
-        self.db = pymysql.connect(host, name, password, dbname,charset="utf8")
+    def __init__(self, host="127.0.0.1", port=33060, name="homestead", password="secret", dbname="tongji98k"):
+        self.db = pymysql.connect(host=host, port=port, user=name, password=password, charset="utf8")
         self.cursor = self.db.cursor()
         self.dbname = dbname
         self.execute("use " + self.dbname)
@@ -30,7 +30,7 @@ class FMysql:
         return columns
 
     def execute(self, sql):
-        print(sql)
+        # print(sql)
         try:
             self.cursor.execute(sql)
             self.db.commit()
@@ -93,9 +93,18 @@ class FMysql:
         sql = "DELETE FROM " + table
         sql += " WHERE " + self.__getCondition(condition)
 
-    def isUrlExist(self,table,url):
-        sql="select count(*) from "+table+" WHERE id = "+str(url)
+    def isUrlExist(self, table, url):
+        sql = "select count(*) from " + table + " WHERE id = " + str(url)
         self.execute(sql)
         return self.cursor.fetchone()[0]
 
+    # 有没有更好的方式去查重?
+    def isTitleExist(self, table, title):
+        sql = "select count(*) from " + table + " WHERE title = '" + str(title) + "'"
+        self.execute(sql)
+        return self.cursor.fetchone()[0]
 
+    def isIdExist(self, table, id):
+        sql = "select count(*) from " + table + " WHERE id = '" + str(id) + "'"
+        self.execute(sql)
+        return self.cursor.fetchone()[0]
