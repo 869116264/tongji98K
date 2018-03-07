@@ -45,9 +45,9 @@ class FMysql:
         columns = "("
         values = "("
         for column in dict:
-            columns += str(column)
+            columns += pymysql.escape_string(str(column))
             columns += ","
-            values += "'" + str(dict[column]) + "'"
+            values += "'" + pymysql.escape_string(str(dict[column])) + "'"
             values += ","
         columns = columns.rstrip(',')
         values = values.rstrip(',')
